@@ -36,6 +36,27 @@
       </a-entity>
     </a-scene>
 
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+      const trackMessage = document.getElementById("track-message");
+
+      // Pega todos os targets da cena
+      const targets = document.querySelectorAll("[mindar-image-target]");
+
+      targets.forEach(target => {
+
+        target.addEventListener("targetFound", () => {
+          trackMessage.style.display = "none";   // Esconde mensagem
+        });
+
+       target.addEventListener("targetLost", () => {
+        trackMessage.style.display = "block";  // Mostra mensagem
+      });
+
+    });
+  });
+</script>
+
     
   </body>
 </html>
