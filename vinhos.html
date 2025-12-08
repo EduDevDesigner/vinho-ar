@@ -1,42 +1,41 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vinhos</title>
-      
-    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.5/dist/mindar-image-aframe.prod.js"></script>
+    <title>Meclin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css">
+    <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
   </head>
-
   <body>
-    <a-scene
-      mindar-image="imageTargetSrc: ./targets.mind;"
-      embedded
-      color-space="sRGB"
-      renderer="colorManagement: true, physicallyCorrectLights"
-      vr-mode-ui="enabled: false"
-    >
+    
+        <!-- 🔹 Mensagem de foco no track -->
+    <div id="track-message">
+      Aponte a câmera para o marcador!
+    </div>
+
+    <!-- Cena AR -->
+    <a-scene mindar-image="imageTargetSrc: Imagens/targets.mind;" 
+             color-space="sRGB" 
+             renderer="colorManagement: true, physicallyCorrectLights" 
+             xr-mode-ui="enabled: false" 
+             device-orientation-permission-ui="enabled: false">
 
       <a-assets>
-        <a-asset-item id="modelA" src="./modelo1.glb"></a-asset-item>
-        <a-asset-item id="modelB" src="./modelo2.glb"></a-asset-item>
-        
+        <a-asset-item id="vinho1" src="Modelos/vinho1.glb"></a-asset-item>
+        <a-asset-item id="vinho2" src="Modelos/vinho2.glb"></a-asset-item>
       </a-assets>
 
-      <!-- Target 0 -->
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
       <a-entity mindar-image-target="targetIndex: 0">
-        <a-entity gltf-model="#modelA" scale="0.5 0.5 0.5"></a-entity>
+        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#vinho1"></a-gltf-model>
       </a-entity>
-
-      <!-- Target 1 -->
       <a-entity mindar-image-target="targetIndex: 1">
-        <a-entity gltf-model="#modelB" scale="0.5 0.5 0.5"></a-entity>
-      </a-entity>     
-
-      <a-entity camera></a-entity>
+        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#vinho2"></a-gltf-model>
+      </a-entity>
     </a-scene>
+
+    
   </body>
 </html>
-
