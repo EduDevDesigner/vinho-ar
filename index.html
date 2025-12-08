@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Início</title>
+
+<!-- Font Awesome (Instagram e Facebook) -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+<style>
+  :root{
+    --instagram: #E1306C;
+    --facebook: #1877F2;
+    --x-bg: #000;
+    --x-fill: #fff;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Orbitron', sans-serif;
+    background: #000;
+    color: #fff;
+  }
+
+  /* Fundo geral */
+  .background-container {
+    position: fixed;
+    inset: 0;
+    background-image: url('Imagens/FundoIndex.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    transform: scale(1.03);
+    z-index: 0;
+  }
+
+  /* Container principal */
+  .container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Botões na frente da imagem */
+  .buttons-container {
+    position: absolute;
+    top: 75%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    z-index: 4;
+  }
+
+  .card {
+    position: relative;
+    cursor: pointer;
+    width: 220px;
+    border: none;
+    background: transparent;
+    border-radius: 0px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 18px rgba(103, 255, 255, 0.6),
+                0 0 30px rgba(0,255,255,0.3) inset;
+    animation: glowBtn 2.8s ease-in-out infinite alternate;
+    transition: transform 0.25s ease;
+  }
+  .card img { width: 100%; height:auto; display:block; border-radius:0px; }
+  .card:hover { transform: scale(1.06); }
+
+  @keyframes glowBtn {
+    0%   { box-shadow: 0 0 16px rgba(252, 226, 167, 0.5); }
+    50%  { box-shadow: 0 0 30px rgba(255, 223, 155, 0.8); }
+    100% { box-shadow: 0 0 16px rgba(166, 170, 170, 0.5); }
+  }
+
+  /* Redes Sociais — lateral direita, vertical e centralizada */
+  .social-icons {
+    position: fixed;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    z-index: 10;
+  }
+
+  .social-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: transform .18s ease, box-shadow .18s ease;
+
+    /* 🔥 CONTORNO BRANCO ADICIONADO 🔥 */
+    border: 2px solid white;
+    box-shadow: 0 0 12px rgba(255,255,255,0.6);
+  }
+
+  .social-icons a.instagram {
+    background: radial-gradient(circle at 30% 20%, #feda75 0%, #fa7e1e 20%, #d62976 50%, #962fbf 70%, #4f5bd5 100%);
+  }
+  .social-icons a.instagram i { color: #fff; font-size:20px; }
+
+  .social-icons a.facebook { background: var(--facebook); }
+  .social-icons a.facebook i { color: #fff; font-size:20px; }
+
+  .social-icons a.x { background: var(--x-bg); }
+  .social-icons a.x svg { display:block; width:22px; height:22px; stroke:#fff; }
+
+  .social-icons a:hover {
+    transform: scale(1.12);
+    box-shadow: 0 14px 28px rgba(255,255,255,0.6);
+  }
+
+  /* Responsividade */
+  @media (max-width:768px) {
+    .card { width: 200px; }
+    .social-icons { right: 15px; }
+  }
+
+  @media (max-width:480px) {
+    .card { width: 160px; }
+    .social-icons { right: 12px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Fundo animado -->
+  <div class="background-container" aria-hidden="true"></div>
+
+  <div class="container">   
+    <div class="buttons-container">
+      <button class="card" onclick="location.href='escolha.html'">
+        <img src="Imagens/btn_iniciar.png" alt="Iniciar">
+      </button>
+    </div>
+  </div>
+
+  <!-- Redes sociais -->
+  <div class="social-icons">
+    <a class="instagram" href="https://www.instagram.com" target="_blank" aria-label="Instagram">
+      <i class="fab fa-instagram"></i>
+    </a>
+
+    <a class="facebook" href="https://www.facebook.com" target="_blank" aria-label="Facebook">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+
+    <a class="x" href="https://x.com" target="_blank" aria-label="X (ex-Twitter)">
+      <svg viewBox="0 0 24 24">
+        <g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6">
+          <path d="M5 5 L19 19"></path>
+          <path d="M19 5 L5 19"></path>
+        </g>
+      </svg>
+    </a>
+  </div>
+
+  <script>
+    function sairPagina() {
+      window.close();
+      window.location.href = "about:blank";
+    }
+  </script>
+
+</body>
+</html>
