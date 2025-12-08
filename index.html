@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Início</title>
 
-<!-- Font Awesome (Instagram e Facebook) -->
+<!-- Font Awesome (Instagram, Facebook, WhatsApp) -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
 <style>
@@ -86,15 +86,15 @@
     100% { box-shadow: 0 0 16px rgba(166, 170, 170, 0.5); }
   }
 
-  /* Redes Sociais — lateral direita, vertical e centralizada */
+  /* Redes sociais — agora na horizontal, embaixo e menores */
   .social-icons {
     position: fixed;
-    right: 25px;
-    top: 50%;
-    transform: translateY(-50%);
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    flex-direction: column;
-    gap: 30px;
+    flex-direction: row;
+    gap: 18px;
     z-index: 10;
   }
 
@@ -102,27 +102,31 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 46px;
-    height: 46px;
+    width: 38px;   /* menor */
+    height: 38px;  /* menor */
     border-radius: 50%;
     text-decoration: none;
     transition: transform .18s ease, box-shadow .18s ease;
-
-    /* 🔥 CONTORNO BRANCO ADICIONADO 🔥 */
     border: 2px solid white;
-    box-shadow: 0 0 12px rgba(255,255,255,0.6);
+    box-shadow: 0 0 10px rgba(255,255,255,0.5);
   }
 
   .social-icons a.instagram {
     background: radial-gradient(circle at 30% 20%, #feda75 0%, #fa7e1e 20%, #d62976 50%, #962fbf 70%, #4f5bd5 100%);
   }
-  .social-icons a.instagram i { color: #fff; font-size:20px; }
+  .social-icons a.instagram i { color: #fff; font-size:17px; }
 
   .social-icons a.facebook { background: var(--facebook); }
-  .social-icons a.facebook i { color: #fff; font-size:20px; }
+  .social-icons a.facebook i { color: #fff; font-size:17px; }
 
-  .social-icons a.x { background: var(--x-bg); }
-  .social-icons a.x svg { display:block; width:22px; height:22px; stroke:#fff; }
+  /* WHATSAPP NOVO NO LUGAR DO X */
+  .social-icons a.whatsapp {
+    background: #25D366;
+  }
+  .social-icons a.whatsapp i {
+    color: #fff;
+    font-size: 18px;
+  }
 
   .social-icons a:hover {
     transform: scale(1.12);
@@ -132,12 +136,10 @@
   /* Responsividade */
   @media (max-width:768px) {
     .card { width: 200px; }
-    .social-icons { right: 15px; }
   }
 
   @media (max-width:480px) {
     .card { width: 160px; }
-    .social-icons { right: 12px; }
   }
 </style>
 </head>
@@ -154,7 +156,7 @@
     </div>
   </div>
 
-  <!-- Redes sociais -->
+  <!-- Redes sociais com WHATSAPP -->
   <div class="social-icons">
     <a class="instagram" href="https://www.instagram.com" target="_blank" aria-label="Instagram">
       <i class="fab fa-instagram"></i>
@@ -164,13 +166,8 @@
       <i class="fab fa-facebook-f"></i>
     </a>
 
-    <a class="x" href="https://x.com" target="_blank" aria-label="X (ex-Twitter)">
-      <svg viewBox="0 0 24 24">
-        <g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6">
-          <path d="M5 5 L19 19"></path>
-          <path d="M19 5 L5 19"></path>
-        </g>
-      </svg>
+    <a class="whatsapp" href="https://wa.me/seunumeroaqui" target="_blank" aria-label="WhatsApp">
+      <i class="fab fa-whatsapp"></i>
     </a>
   </div>
 
