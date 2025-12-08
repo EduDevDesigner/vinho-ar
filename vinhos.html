@@ -1,17 +1,77 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
-    <title>Meclin</title>
+    <title>Vinhos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="style.css">
     <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+
+    <style>
+      /* Botão transparente */
+      #btn-descricao {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 12px 20px;
+        font-size: 18px;
+        background: rgba(0,0,0,0.4);
+        border: 2px solid white;
+        color: white;
+        border-radius: 8px;
+        backdrop-filter: blur(5px);
+        display: none;
+        z-index: 9999;
+      }
+
+      /* Painel */
+      #painel-descricao {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        max-width: 350px;
+        background: rgba(0,0,0,0.85);
+        color: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+        backdrop-filter: blur(8px);
+        display: none;
+        z-index: 99999;
+      }
+
+      #painel-descricao h2 {
+        margin: 0;
+        margin-bottom: 10px;
+      }
+
+      #fechar-painel {
+        position: absolute;
+        top: 8px;
+        right: 12px;
+        font-size: 22px;
+        cursor: pointer;
+      }
+    </style>
+
   </head>
   <body>
     
-        <!-- 🔹 Mensagem de foco no track -->
+    <!-- 🔹 Mensagem de foco no track -->
     <div id="track-message">
       Aponte a câmera para o marcador!
+    </div>
+
+    <!-- 🔹 Botão de descrição -->
+    <button id="btn-descricao">Descrição</button>
+
+    <!-- 🔹 Painel flutuante -->
+    <div id="painel-descricao">
+      <span id="fechar-painel">✖</span>
+      <h2 id="titulo-vinho"></h2>
+      <p id="texto-vinho"></p>
     </div>
 
     <!-- Cena AR -->
@@ -31,6 +91,7 @@
       <a-entity mindar-image-target="targetIndex: 0">
         <a-gltf-model rotation="90 0 0 " position="0 0 0" scale="1 1 1" src="#vinho1"></a-gltf-model>
       </a-entity>
+
       <a-entity mindar-image-target="targetIndex: 1">
         <a-gltf-model rotation="90 0 0 " position="0 0 0" scale="1 1 1" src="#vinho2"></a-gltf-model>
       </a-entity>
@@ -39,6 +100,26 @@
     <script>
       window.addEventListener("DOMContentLoaded", () => {
       const trackMessage = document.getElementById("track-message");
+      const btnDescricao  = document.getElementById("btn-descricao");
+      const painel        = document.getElementById("painel-descricao");
+      const fecharPainel  = document.getElementById("fechar-painel");
+
+      const tituloVinho   = document.getElementById("titulo-vinho");
+      const textoVinho    = document.getElementById("texto-vinho");
+
+      // Textos dos vinhos (exemplo, você pode editar)
+      const informacoes = {
+        0: {
+          titulo: "Vinho Tinto Reserva",
+          texto: "Aroma intenso, notas de frutas vermelhas, taninos macios e final prolongado."
+        },
+        1: {
+          titulo: "Vinho Branco Seco",
+          texto: "Refrescante, acidez equilibrada, notas cítricas e florais, ideal para dias quentes."
+        }
+      };
+
+      let targetAtual = null;
 
       // Pega todos os targets da cena
       const targets = document.querySelectorAll("[mindar-image-target]");
@@ -47,16 +128,42 @@
 
         target.addEventListener("targetFound", () => {
           trackMessage.style.display = "none";   // Esconde mensagem
+
+          // Obtém index do target
+          targetAtual = parseInt(target.getAttribute("mindar-image-target").split(":")[1]);
+
+          // Mostra botão
+          btnDescricao.style.display = "block";
         });
 
-       target.addEventListener("targetLost", () => {
-        trackMessage.style.display = "block";  // Mostra mensagem
+        target.addEventListener("targetLost", () => {
+          trackMessage.style.display = "block";  // Mostra mensagem
+
+          // Esconde tudo
+          btnDescricao.style.display = "none";
+          painel.style.display = "none";
+
+          targetAtual = null;
+        });
+
+      });
+
+      // Clique no botão Descrição → abre painel
+      btnDescricao.addEventListener("click", () => {
+        if (targetAtual !== null) {
+          tituloVinho.textContent = informacoes[targetAtual].titulo;
+          textoVinho.textContent  = informacoes[targetAtual].texto;
+          painel.style.display = "block";
+        }
+      });
+
+      // Fechar painel
+      fecharPainel.addEventListener("click", () => {
+        painel.style.display = "none";
       });
 
     });
-  });
-</script>
+    </script>
 
-    
   </body>
 </html>
