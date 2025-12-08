@@ -68,6 +68,10 @@
       <p id="texto-vinho"></p>
     </div>
 
+    <!-- 🎵 Áudios -->
+    <audio id="audio-vinho1" src="Audios/Pinot%20Noir.mp3"></audio>
+    <audio id="audio-vinho2" src="Audios/Riesling.mp3"></audio>
+
     <!-- Cena AR -->
     <a-scene mindar-image="imageTargetSrc: Imagens/targets.mind;" 
              color-space="sRGB" 
@@ -101,44 +105,72 @@
         const fecharPainel = document.getElementById("fechar-painel");
         const textoVinho = document.getElementById("texto-vinho");
 
+        // 🎵 Áudios
+        const audio1 = document.getElementById("audio-vinho1");
+        const audio2 = document.getElementById("audio-vinho2");
+
+        let vinhoAtual = null; // guarda qual vinho está ativo
+
         const targets = document.querySelectorAll("[mindar-image-target]");
 
         targets.forEach(target => {
 
           target.addEventListener("targetFound", () => {
             trackMessage.style.display = "none";
-
-            // Mostrar botão quando um marcador for detectado
             btnDesc.style.display = "block";
 
-            // Detectando qual vinho foi encontrado
             const index = target.getAttribute("mindar-image-target").targetIndex;
 
-            if (index == 0) {
-              textoVinho.textContent = "O Vinho Marcus James Pinot Noir é leve, que possui aromas frutados, lembrando morangos, e um paladar macio. Outra característica marcanto é que ele é um vinho jovem e muito agradável.";
-            } else if (index == 1) {
-              textoVinho.textContent = "Vinho 2 — Intenso, encorpado, final persistente.";
+            vinhoAtual = index; // salva qual vinho está ativo
+
+            if (index == "0") {
+              textoVinho.textContent =
+                "O Vinho Marcus James Pinot Noir é leve, possui aromas frutados lembrando morangos, com paladar macio. É um vinho jovem e muito agradável.";
+            } 
+            else if (index == "1") {
+              textoVinho.textContent =
+                "Vinho 2 — Intenso, encorpado, com final longo e persistente.";
             }
+
           });
 
           target.addEventListener("targetLost", () => {
             trackMessage.style.display = "block";
-
-            // Ocultar botão e painel
             btnDesc.style.display = "none";
             painel.style.display = "none";
+
+            // 🎵 parar áudio se perder o marcador
+            audio1.pause();
+            audio2.pause();
+            audio1.currentTime = 0;
+            audio2.currentTime = 0;
           });
 
         });
 
-        // Abrir painel
+        // Abrir painel + tocar áudio certo
         btnDesc.addEventListener("click", () => {
           painel.style.display = "block";
+
+          if (vinhoAtual == "0") {
+            audio2.pause();
+            audio2.currentTime = 0;
+            audio1.play();
+          }
+          if (vinhoAtual == "1") {
+            audio1.pause();
+            audio1.currentTime = 0;
+            audio2.play();
+          }
         });
 
-        // Fechar painel
+        // Fechar painel + parar áudio
         fecharPainel.addEventListener("click", () => {
           painel.style.display = "none";
+          audio1.pause();
+          audio2.pause();
+          audio1.currentTime = 0;
+          audio2.currentTime = 0;
         });
 
       });
