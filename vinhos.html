@@ -6,12 +6,66 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+
+    <style>
+      /* 🔹 Botão de Descrição */
+      #btn-desc {
+        position: fixed;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0,0,0,0.6);
+        color: #fff;
+        border: 1px solid #fff;
+        padding: 10px 16px;
+        border-radius: 6px;
+        font-size: 15px;
+        cursor: pointer;
+        z-index: 9999;
+        display: none;
+      }
+
+      /* 🔹 Painel */
+      #painel-desc {
+        position: fixed;
+        right: 0;
+        top: 0;
+        width: 70%;
+        height: 100%;
+        background: rgba(0,0,0,0.88);
+        color: white;
+        padding: 20px;
+        z-index: 10000;
+        display: none;
+      }
+
+      /* 🔹 Botão X fechar */
+      #fechar-painel {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        font-size: 26px;
+        cursor: pointer;
+        color: #fff;
+      }
+    </style>
+
   </head>
   <body>
     
-        <!-- 🔹 Mensagem de foco no track -->
+    <!-- 🔹 Mensagem de foco no track -->
     <div id="track-message">
       Aponte a câmera para o marcador!
+    </div>
+
+    <!-- 🔹 Botão de descrição -->
+    <div id="btn-desc">Descrição</div>
+
+    <!-- 🔹 Painel lateral -->
+    <div id="painel-desc">
+      <div id="fechar-painel">X</div>
+      <h2>Características do Vinho</h2>
+      <p id="texto-vinho"></p>
     </div>
 
     <!-- Cena AR -->
@@ -31,32 +85,64 @@
       <a-entity mindar-image-target="targetIndex: 0">
         <a-gltf-model rotation="90 0 0 " position="0 0 0" scale="1 1 1" src="#vinho1"></a-gltf-model>
       </a-entity>
+
       <a-entity mindar-image-target="targetIndex: 1">
         <a-gltf-model rotation="90 0 0 " position="0 0 0" scale="1 1 1" src="#vinho2"></a-gltf-model>
       </a-entity>
+
     </a-scene>
 
     <script>
       window.addEventListener("DOMContentLoaded", () => {
-      const trackMessage = document.getElementById("track-message");
 
-      // Pega todos os targets da cena
-      const targets = document.querySelectorAll("[mindar-image-target]");
+        const trackMessage = document.getElementById("track-message");
+        const btnDesc = document.getElementById("btn-desc");
+        const painel = document.getElementById("painel-desc");
+        const fecharPainel = document.getElementById("fechar-painel");
+        const textoVinho = document.getElementById("texto-vinho");
 
-      targets.forEach(target => {
+        const targets = document.querySelectorAll("[mindar-image-target]");
 
-        target.addEventListener("targetFound", () => {
-          trackMessage.style.display = "none";   // Esconde mensagem
+        targets.forEach(target => {
+
+          target.addEventListener("targetFound", () => {
+            trackMessage.style.display = "none";
+
+            // Mostrar botão quando um marcador for detectado
+            btnDesc.style.display = "block";
+
+            // Detectando qual vinho foi encontrado
+            const index = target.getAttribute("mindar-image-target").targetIndex;
+
+            if (index == 0) {
+              textoVinho.textContent = "Vinho 1 — Corpo médio, notas frutadas, aroma suave.";
+            } else if (index == 1) {
+              textoVinho.textContent = "Vinho 2 — Intenso, encorpado, final persistente.";
+            }
+          });
+
+          target.addEventListener("targetLost", () => {
+            trackMessage.style.display = "block";
+
+            // Ocultar botão e painel
+            btnDesc.style.display = "none";
+            painel.style.display = "none";
+          });
+
         });
 
-       target.addEventListener("targetLost", () => {
-        trackMessage.style.display = "block";  // Mostra mensagem
+        // Abrir painel
+        btnDesc.addEventListener("click", () => {
+          painel.style.display = "block";
+        });
+
+        // Fechar painel
+        fecharPainel.addEventListener("click", () => {
+          painel.style.display = "none";
+        });
+
       });
+    </script>
 
-    });
-  });
-</script>
-
-    
   </body>
 </html>
