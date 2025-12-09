@@ -214,21 +214,7 @@ body {
 
 /* ---------------------------------------------------- */
 
-#track-message {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(0,0,0,0.7);
-  color: yellow;
- font-family: 'Changa One', sans-serif;
-  font-size: 1em;
-  padding: 10px 20px;
-  border-radius: 8px;
-  text-align: center;
-  text-shadow: 2px 2px 5px black;
-  z-index: 9999;
-}
+
 .hidden {
   display: none !important;
 }
