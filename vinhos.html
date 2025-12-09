@@ -124,7 +124,19 @@
             vinhoAtual = index; // salva qual vinho está ativo
 
             if (index == "0") {
-              textoVinho.textContent ="O Vinho Marcus James Pinot Noir é leve, possui aromas frutados lembrando morangos, com paladar macio. É um vinho jovem e muito agradável.";
+              textoVinho.innerHTML = `
+  <p>O Vinho Marcus James Pinot Noir é leve, com aromas frutados que lembram morangos e um paladar macio. 
+  Outra característica marcante é que ele é um vinho jovem e muito agradável.</p>
+
+  <h3>Características do Produto</h3>
+
+  <p><strong>Tipo de Vinho:</strong> Vinho Tinto Meio Seco</p>
+  <p><strong>Tipo de Fechamento:</strong> Rolha</p>
+  <p><strong>Safra:</strong> 2024</p>
+  <p><strong>Região:</strong> Serra Gaúcha</p>
+  <p><strong>Uvas:</strong> Pinot Noir</p>
+`;
+
             } 
             else if (index == "1") {
               textoVinho.innerHTML = `
