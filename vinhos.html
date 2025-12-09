@@ -48,6 +48,11 @@
         cursor: pointer;
         color: #fff;
       }
+
+      /* 🔹 Alinhar texto à direita (implementação solicitada) */
+      #texto-vinho {
+        text-align: right;
+      }
     </style>
 
   </head>
@@ -125,18 +130,17 @@
 
             if (index == "0") {
               textoVinho.innerHTML = `
-  <p>O Vinho Marcus James Pinot Noir é leve, com aromas frutados que lembram morangos e um paladar macio. 
-  Outra característica marcante é que ele é um vinho jovem e muito agradável.</p>
+               <p>O Vinho Marcus James Pinot Noir é leve, com aromas frutados que lembram morangos e um paladar macio. 
+               Outra característica marcante é que ele é um vinho jovem e muito agradável.</p>
 
-  <h3>Características do Produto</h3>
+               <h3>Características do Produto</h3>
 
-  <p><strong>Tipo de Vinho:</strong> Vinho Tinto Meio Seco</p>
-  <p><strong>Tipo de Fechamento:</strong> Rolha</p>
-  <p><strong>Safra:</strong> 2024</p>
-  <p><strong>Região:</strong> Serra Gaúcha</p>
-  <p><strong>Uvas:</strong> Pinot Noir</p>
-`;
-
+              <p><strong>Tipo de Vinho:</strong> Vinho Tinto Meio Seco</p>
+              <p><strong>Tipo de Fechamento:</strong> Rolha</p>
+              <p><strong>Safra:</strong> 2024</p>
+              <p><strong>Região:</strong> Serra Gaúcha</p>
+              <p><strong>Uvas:</strong> Pinot Noir</p>
+              `;
             } 
             else if (index == "1") {
               textoVinho.innerHTML = `
@@ -154,7 +158,6 @@
                <p><strong>Região:</strong> Serra Gaúcha</p>
                <p><strong>Uvas:</strong> Riesling</p>
                `;
-
             }
 
           });
@@ -164,7 +167,6 @@
             btnDesc.style.display = "none";
             painel.style.display = "none";
 
-            // 🎵 parar áudio se perder o marcador
             audio1.pause();
             audio2.pause();
             audio1.currentTime = 0;
@@ -173,7 +175,6 @@
 
         });
 
-        // Abrir painel + tocar áudio certo
         btnDesc.addEventListener("click", () => {
           painel.style.display = "block";
 
@@ -189,7 +190,6 @@
           }
         });
 
-        // Fechar painel + parar áudio
         fecharPainel.addEventListener("click", () => {
           painel.style.display = "none";
           audio1.pause();
